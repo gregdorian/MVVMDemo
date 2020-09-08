@@ -1,0 +1,41 @@
+﻿<Window x:Class="MVVMDemo.Views.UserRegistrationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:VM="clr-namespace:MVVMDemo.ViewModels"
+        xmlns:VM1="clr-namespace:MVVMDemo.Utilities"
+        Title="UserRegistrationView" Height="300" Width="300">
+    <Window.DataContext>
+        <VM:StudentViewModel/>
+        <!---->
+    </Window.DataContext>
+    <Window.Resources>
+        <VM1:DatetimeToDateConverter x:Key="MyConverter"/>
+    </Window.Resources>
+    <Grid DataContext="{Binding StudentViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>  
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" HorizontalAlignment="Center"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Center" Text="{Binding Student.Name, Mode=TwoWay}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Age" HorizontalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Center" Text="{Binding Student.Age, Mode=TwoWay}"/>
+        <Button Content="Submit" Command="{Binding SubmitCommand}" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0"/>
+        <ListView ItemsSource="{Binding Students}" Grid.Row="3" Grid.Column="1" Width="200">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="60"/>
+                    <GridViewColumn  Header="Age" DisplayMemberBinding="{Binding Age}" Width="60"/>
+                    <GridViewColumn  Header="Joining Date" DisplayMemberBinding="{Binding JoiningDate, Converter={StaticResource MyConverter}}" Width="80" /> <!--{Binding JoiningDate, Converter=MyConverter}-->
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

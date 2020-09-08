@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVMDemo.Views;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,10 @@ namespace MVVMDemo
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            UserRegistrationView usrVista = new UserRegistrationView();
+            usrVista.Show();
+        }
     }
 }
